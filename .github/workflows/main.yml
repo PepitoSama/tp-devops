@@ -48,5 +48,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: my-docker-hub-namespace/my-docker-hub-repository
+          repository: aleblancdocker/tp-devops
           tag_with_ref: true
