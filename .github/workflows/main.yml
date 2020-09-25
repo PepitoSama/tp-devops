@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run gradles test
-        run: ./gradlew check
+        run: ./gradlew check -Pdatabase.url=postgres/tp_devops
 
       - name: Build jar
         run: ./gradlew assemble
