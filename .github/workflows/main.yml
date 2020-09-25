@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run gradles test
-        run: ./gradlew check -debug -P database.url="postgres/tp_devops"
+        run: ./gradlew check -i -Pdatabase.url="postgres/tp_devops" 
 
       - name: Build jar
         run: ./gradlew assemble
