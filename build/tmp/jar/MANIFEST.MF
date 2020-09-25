@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: dev.gleroy.devops.tp.docker.AppKt
+Implementation-Version: 1.0.0
+
