@@ -4,23 +4,36 @@ on:
     branches:
       - master        
 jobs:
-    
-  push_to_registry:
-    services:
-      postgres:
-        image: postgres
-        env: 
-          POTGRES_USER: tp_devops
-          POSTGRES_PASSWORD: tp_devops
-          POSTGRES_DB: tp_devops
-    name: Push Docker image to Docker Hub
+  # Label of the container job
+  container-job:
+    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: tp_devops
+          POSTGRES_USERNAME: tp_devops
+          POSTGRES_DB: tp_devops
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - name: Check out the repo
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
         uses: actions/checkout@v2
 
       - name: Run gradles test
-        run: ./gradlew check -Pdatabase.url=postgres/tp_devops
+        run: ./gradlew check -debug -P database.url="postgres/tp_devops"
 
       - name: Build jar
         run: ./gradlew assemble
