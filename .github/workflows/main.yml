@@ -11,14 +11,13 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Run tests
-        run: |
-          if [ -f docker-compose.test.yml ]; then
-            docker-compose --file docker-compose.test.yml build
-            docker-compose --file docker-compose.test.yml run sut
-          else
-            docker build . --file Dockerfile
-          fi
+      - name: Run gradles test
+        run:
+          ./gradew check
+
+      - name: Build jar
+        run:
+          ./gradew assemble
 
       - name: Build image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_CONTAINER_NAME }}
