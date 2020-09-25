@@ -18,7 +18,7 @@ jobs:
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: tp_devops
-          POSTGRES_USERNAME: tp_devops
+          POSTGRES_USER: tp_devops
           POSTGRES_DB: tp_devops
         # Set health checks to wait until postgres has started
         ports:
