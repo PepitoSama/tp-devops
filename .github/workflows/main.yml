@@ -4,21 +4,23 @@ on:
     branches:
       - master        
 jobs:
+    
   push_to_registry:
+    services:
+      postgres:
+        image: postgres
+        env: 
+          POTGRES_USER: tp_devops
+          POSTGRES_PASSWORD: tp_devops
+          POSTGRES_DB: tp_devops
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-     
-      - name: Pull Postgres docker
-        run: docker pull postgres
-      
-      - name: Run Postgres Container
-        run: docker-compose -f stack.yml up
 
       - name: Run gradles test
-        run: ./gradlew check -debug
+        run: ./gradlew check
 
       - name: Build jar
         run: ./gradlew assemble
