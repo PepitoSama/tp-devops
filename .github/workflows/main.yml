@@ -18,10 +18,10 @@ jobs:
         run: docker run --name postgrestp4 -e POSTGRES_USER=tp_devops -e POSTGRES_PASSWORD=tp_devops -e POSTGRES_DB=tp_devops --cpus=1 --expose=2345 --memory=50M -d postgres
 
       - name: Run gradles test
-        run: ./gradew check
+        run: ./gradlew check
 
       - name: Build jar
-        run: ./gradew assemble
+        run: ./gradlew assemble
 
       - name: Build image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_CONTAINER_NAME }}
